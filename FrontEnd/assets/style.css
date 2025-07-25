@@ -332,3 +332,65 @@ footer nav ul {
 	color: inherit;
 	text-decoration: none;
 }
+
+/* Bouton Modifier */
+#openModal {
+  padding: 0.5rem 1rem;
+  background: #1d72b8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  padding: 2rem;
+  z-index: 1000;
+  width: 500px;
+  border-radius: 8px;
+}
+
+/* Bouton Fermer */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* Vue Galerie / Vue Ajout */
+.modal-view {
+  display: none;
+}
+
+.modal-view.active {
+  display: block;
+}
+
+.gallery-placeholder {
+  border: 2px dashed #ccc;
+  padding: 2rem;
+  margin: 1rem 0;
+  text-align: center;
+}
