@@ -19,12 +19,16 @@
 
 <body>
   <header>
-    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+    <h1>
+      <a href="index.html" class="home-link">
+        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+      </a>
+    </h1>
     <nav>
       <ul>
         <li>projets</li>
         <li>contact</li>
-        <li>login</li>
+        <li><a href="login.html">Login</a></li>
         <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
       </ul>
     </nav>
@@ -33,13 +37,14 @@
   <main>
     <div class="contentLogin">
       <h1>Log in</h1>
-      <form action="#" method="get">
+      <form id="loginForm">
         <label for="email">E-mail</label>
         <input type="email" name="email" id="emailLogin">
-        <label for="passWord">Mot de passe</label>
-        <input type="text" name="passWord" id="passWord">
+        <label for="password">Mot de passe</label>
+        <input type="text" name="password" id="password">
         <input type="submit" value="Se connecter" id="connection">
         <a href="#">Mot de passe oublié</a>
+        <p id="errorMessage" class="error-message"></p>
       </form>
     </div>
   </main>
@@ -51,7 +56,7 @@
       </ul>
     </nav>
   </footer>
-
+  <script src="api/login.js" defer></script>
 </body>
 
 </html>
