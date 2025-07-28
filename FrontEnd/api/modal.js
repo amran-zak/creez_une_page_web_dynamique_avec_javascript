@@ -1,95 +1,71 @@
-const token = localStorage.getItem("token");
 const openModalBtn = document.getElementById('openModal');
-const closeModalBtn = document.getElementById('modal-close');
+const closeModalBtn = document.getElementById('closeModal');
 const modal = document.getElementById('modal');
-const overlay = document.getElementById('modal-overlay');
-const galleryView = document.getElementById('modal-gallery-view');
-const addView = document.getElementById('modal-add-view');
-const switchToAddView = document.getElementById('switchToAddView');
+const addPhotoBtn = document.getElementById('addPhotoBtn');
+const addPhotoForm = document.getElementById('addPhotoForm');
 const backToGallery = document.getElementById('backToGallery');
-const modalGallery = document.getElementById('modal-gallery');
-const adminBar = document.getElementById("admin-bar");
+const modalGallery = document.getElementById('modalGallery');
 
-// 1. Afficher le bouton Modifier si connecté
-if (token) {
-  adminBar.style.display = "block";
-}
-
-// 2. Ouvrir la modale + charger les images
-openModalBtn.addEventListener('click', async () => {
+// Afficher la modale
+openModalBtn.addEventListener('click', () => {
   modal.style.display = 'flex';
-  galleryView.classList.add('active');
-  addView.classList.remove('active');
-  await loadModalGallery();
+  loadModalGallery();
 });
 
-// 3. Fermer la modale
+// Fermer la modale
 closeModalBtn.addEventListener('click', () => {
   modal.style.display = 'none';
+  resetForm();
 });
 
-overlay.addEventListener('click', () => {
-  modal.style.display = 'none';
+// Clic en dehors = fermer
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+    resetForm();
+  }
 });
 
-// 4. Changer de vue
-switchToAddView.addEventListener('click', () => {
-  galleryView.classList.remove('active');
-  addView.classList.add('active');
+// Afficher le formulaire
+addPhotoBtn.addEventListener('click', () => {
+  modalGallery.style.display = 'none';
+  addPhotoForm.style.display = 'block';
 });
 
+// Revenir à la galerie
 backToGallery.addEventListener('click', () => {
-  addView.classList.remove('active');
-  galleryView.classList.add('active');
+  addPhotoForm.style.display = 'none';
+  modalGallery.style.display = 'flex';
 });
 
-// 5. Charger les images dans la modale
-async function loadModalGallery() {
-  modalGallery.innerHTML = ""; // vider avant de recharger
-  try {
-    const res = await fetch("http://localhost:5678/api/works");
-    const works = await res.json();
-
-    works.forEach(work => {
-      const item = document.createElement("div");
-      item.className = "gallery-item";
-
-      const img = document.createElement("img");
-      img.src = work.imageUrl;
-      img.alt = work.title;
-
-      const deleteBtn = document.createElement("button");
-      deleteBtn.className = "delete-btn";
-      deleteBtn.textContent = "×";
-      deleteBtn.addEventListener("click", () => {
-        deleteWork(work.id);
+// Afficher la galerie dans la modale
+function loadModalGallery() {
+  modalGallery.innerHTML = ''; // reset
+  // Récupère tes projets ici depuis l'API ou tes données locales
+  fetch('http://localhost:5678/api/works')
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(work => {
+        const item = document.createElement('div');
+        item.classList.add('image-item');
+        item.innerHTML = `
+          <img src="${work.imageUrl}" alt="${work.title}">
+          <button class="delete-btn" data-id="${work.id}">×</button>
+        `;
+        modalGallery.appendChild(item);
       });
-
-      item.appendChild(img);
-      item.appendChild(deleteBtn);
-      modalGallery.appendChild(item);
     });
-  } catch (e) {
-    console.error("Erreur chargement galerie:", e);
-  }
 }
 
-// 6. Supprimer un projet
-async function deleteWork(id) {
-  try {
-    const res = await fetch(`http://localhost:5678/api/works/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+// Gestion des suppressions
+modalGallery.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('delete-btn')) {
+    const id = e.target.dataset.id;
+    const token = localStorage.getItem('token');
+    await fetch(`http://localhost:5678/api/works/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` }
     });
-
-    if (res.ok) {
-      await loadModalGallery(); // recharger la galerie après suppression
-    } else {
-      alert("Erreur lors de la suppression");
-    }
-  } catch (e) {
-    console.error("Erreur suppression:", e);
+    loadModalGallery(); // Refresh
   }
-}
+});

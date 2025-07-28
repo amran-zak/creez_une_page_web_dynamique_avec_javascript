@@ -72,13 +72,46 @@
 				<input type="submit" value="Envoyer">
 			</form>
 		</section>
-		<!-- Modal galerie -->
-		<div id="modal-gallery-view" class="modal-view active">
-			<h2>Galerie Photo</h2>
-			<div id="modal-gallery" class="gallery-container">
-				<!-- Images chargées dynamiquement ici -->
+		<!-- MODAL -->
+		<div id="modal" class="modal">
+			<div class="modal-content">
+				<span id="closeModal" class="close">&times;</span>
+				<h3>Galerie photo</h3>
+				<div class="modal-gallery" id="modalGallery">
+					<!-- Les images seront injectées ici -->
+				</div>
+				<button id="addPhotoBtn" class="add-photo">Ajouter une photo</button>
+				<!-- Formulaire d'ajout de photo -->
+				<div id="addPhotoForm" class="add-photo-form" style="display: none;">
+					<img id="backToGallery" class="back-arrow" src="assets/images/back.png"></img>
+					<h3>Ajout photo</h3>
+
+					<form id="photoForm">
+						<div class="upload-box" id="uploadBox">
+							<label for="imageInput" class="upload-label">
+								<img src="assets/images/image.png" class="placeholder" />
+								<span>+ Ajouter photo</span>
+								<small>jpg, png : 4mo max</small>
+							</label>
+							<input type="file" id="imageInput" accept="image/png, image/jpeg" hidden>
+						</div>
+
+						<label for="titleInput" class="photoFormLabel">Titre</label>
+						<input type="text" id="titleInput" required>
+
+						<label for="categorySelect" class="photoFormLabel">Catégorie</label>
+						<select id="categorySelect" required>
+							<option value=""></option>
+							<!-- options injectées via JS -->
+						</select>
+
+						<hr />
+
+						<button type="submit" id="submitBtn" disabled>Valider</button>
+					</form>
+				</div>
+
 			</div>
-			<button id="switchToAddView">Ajouter une photo</button>
 		</div>
 	</main>
 
@@ -90,9 +123,11 @@
 		</nav>
 	</footer>
 
+	<script src="api/script.js"></script>
 	<script src="api/gallery.js"></script>
 	<script src="api/modal.js"></script>
 	<script src="api/logout.js"></script>
+	<script src="api/add-photo.js"></script>
 </body>
 
 </html>
