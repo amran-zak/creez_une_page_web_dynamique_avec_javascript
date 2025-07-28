@@ -218,11 +218,6 @@ li:hover {
 	margin-bottom: 0.5em;
 }
 
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
-}
-
 .gallery {
 	width: 100%;
 	display: grid;
@@ -333,64 +328,111 @@ footer nav ul {
 	text-decoration: none;
 }
 
-/* Bouton Modifier */
+.portfolio-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 3em;
+}
+
+.portfolio-header h2 {
+  font-size: 26px;
+  color: #1D6154;
+  font-weight: 700;	
+	text-align: center;
+}
+
+#portfolio .portfolio-header {
+display: flex;
+	justify-content: center;
+}
+
 #openModal {
-  padding: 0.5rem 1rem;
-  background: #1d72b8;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+	background: transparent;
+	color: #000000;
+	border: 1px solid #ffffff;
+	cursor: pointer;
+	font-weight: 700;
 }
 
 /* Modal */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  inset: 0;
-  justify-content: center;
-  align-items: center;
+	display: none;
+	position: fixed;
+	z-index: 999;
+	inset: 0;
+	justify-content: center;
+	align-items: center;
 }
 
 .modal-overlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+	position: absolute;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal-content {
-  position: relative;
-  background: white;
-  padding: 2rem;
-  z-index: 1000;
-  width: 500px;
-  border-radius: 8px;
+	position: relative;
+	background: white;
+	padding: 2rem;
+	z-index: 1000;
+	width: 500px;
+	border-radius: 8px;
 }
 
 /* Bouton Fermer */
 .modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  font-size: 1.5rem;
-  border: none;
-  cursor: pointer;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: transparent;
+	font-size: 1.5rem;
+	border: none;
+	cursor: pointer;
 }
 
 /* Vue Galerie / Vue Ajout */
 .modal-view {
-  display: none;
+	display: none;
 }
 
 .modal-view.active {
-  display: block;
+	display: block;
 }
 
 .gallery-placeholder {
-  border: 2px dashed #ccc;
-  padding: 2rem;
-  margin: 1rem 0;
-  text-align: center;
+	border: 2px dashed #ccc;
+	padding: 2rem;
+	margin: 1rem 0;
+	text-align: center;
+}
+
+.gallery-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.gallery-item {
+	position: relative;
+	width: 100px;
+}
+
+.gallery-item img {
+	width: 100%;
+	border-radius: 4px;
+}
+
+.gallery-item .delete-btn {
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	background: red;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	font-size: 14px;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
 }

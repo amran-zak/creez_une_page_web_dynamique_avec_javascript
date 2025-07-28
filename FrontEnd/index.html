@@ -25,6 +25,7 @@
 				<li>projets</li>
 				<li>contact</li>
 				<li><a href="login.html">Login</a></li>
+				<li><a href="#" id="logout">Logout</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -45,11 +46,16 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
-			<div class="filters"></div>
-			<div class="edit-bar">
-				<button id="openModal">Modifier</button>
+			<div class="portfolio-header">
+				<h2>Mes projets</h2>
+				<div id="admin-bar" style="display: none;">
+					<button id="openModal">
+						<img src="./assets/images/Vector.png" alt="Modifier" class="icon-edit">
+						modifier
+					</button>
+				</div>
 			</div>
+			<div class="filters"></div>
 			<div class="gallery">
 			</div>
 		</section>
@@ -66,46 +72,14 @@
 				<input type="submit" value="Envoyer">
 			</form>
 		</section>
-		<!-- Fenêtre modale (à ajouter dynamiquement ou dans le HTML de base) -->
-		<div class="modal" id="modal" aria-hidden="true" style="display: none;">
-			<div class="modal-overlay" id="modal-overlay"
-				style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6);"></div>
-
-			<div class="modal-content" role="dialog" aria-modal="true"
-				style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 2rem; width: 90%; max-width: 600px; border-radius: 8px;">
-				<button class="modal-close" id="modal-close"
-					style="position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem;">&times;</button>
-
-				<!-- VUE 1 : Galerie photo -->
-				<div id="gallery-view">
-					<h2>Galerie photo</h2>
-					<div id="gallery-container">
-						<!-- Les images récupérées via GET /works seront insérées ici -->
-					</div>
-					<button id="switch-to-add-view" style="margin-top: 1rem;">Ajouter une photo</button>
-				</div>
-
-				<!-- VUE 2 : Ajout photo -->
-				<div id="add-photo-view" style="display: none;">
-					<h2>Ajout d'une photo</h2>
-					<form id="photo-upload-form">
-						<label>Titre : <input type="text" name="title" required /></label><br><br>
-						<label>Catégorie :
-							<select name="category" required>
-								<!-- Options insérées dynamiquement via GET /categories -->
-							</select>
-						</label><br><br>
-						<label>Image :
-							<input type="file" name="image" accept="image/*" required />
-						</label><br><br>
-						<button type="submit">Valider</button>
-						<button type="button" id="cancel-add-photo">Annuler</button>
-					</form>
-				</div>
+		<!-- Modal galerie -->
+		<div id="modal-gallery-view" class="modal-view active">
+			<h2>Galerie Photo</h2>
+			<div id="modal-gallery" class="gallery-container">
+				<!-- Images chargées dynamiquement ici -->
 			</div>
+			<button id="switchToAddView">Ajouter une photo</button>
 		</div>
-
-
 	</main>
 
 	<footer>
@@ -118,6 +92,7 @@
 
 	<script src="api/gallery.js"></script>
 	<script src="api/modal.js"></script>
+	<script src="api/logout.js"></script>
 </body>
 
 </html>
