@@ -370,227 +370,270 @@ footer nav ul {
 	font-size: 15px;
 }
 
-/* Conteneur d’overlay */
+/* ===== Overlay (fond grisé) ===== */
 .backgroundPopUp {
 	display: none;
+	/* sera passé à flex en JS pour ouvrir */
 	position: fixed;
 	inset: 0;
-	/* équivaut à top/left/right/bottom: 0 */
-	background-color: rgba(0, 0, 0, 0.5);
+	/* top/right/bottom/left: 0 */
+	background: rgba(0, 0, 0, .5);
 	z-index: 1000;
-	/* Centrage du contenu */
-	display: none;
-	/* restera controlé au JS: 'flex' pour ouvrir */
+
+	/* centrage de la carte */
 	justify-content: center;
 	align-items: center;
 }
 
-/* Carte/modale commune */
+.contentModal {
+	display: flex;
+	flex-direction: column;
+}
+
+/* ===== Carte/modale ===== */
 .PopUpGallery {
-	background-color: #fff;
-	width: min(700px, 90vw);
+	background: #fff;
+	width: min(630px, 92vw);
 	max-height: 85vh;
-	/* clé : limite la hauteur */
+	/* important : évite que ça sorte de l’écran */
 	overflow: auto;
-	/* clé : fait apparaître le scroll interne si besoin */
-	border-radius: 20px;
-	padding: 30px;
+	/* scroll interne si besoin */
+	border-radius: 12px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, .15);
+	padding: 28px 34px;
 	position: relative;
-}
-
-#galleryPhoto {
-	position: fixed;
-	top: 0;
-	left: 0;
-	transform: translate(80%, 25%);
 	display: flex;
 	flex-direction: column;
-	background-color: white;
-	width: 35%;
-	border-radius: 20px;
-	padding: 30px;
 }
 
-#photoAdd {
-	position: fixed;
-	top: 0;
-	left: 0;
-	transform: translate(80%, 20%);
-	display: none;
-	flex-direction: column;
-	background-color: white;
-	width: 35%;
-	border-radius: 20px;
-	padding: 30px;
-}
-
-.fa-xmark {
-	display: flex;
-	justify-content: right;
-	font-size: 20px;
-}
-
+/* Titre de la modale */
 .PopUpGallery h2 {
-	font-size: 25px;
-	font-family: 'Work Sans';
-	font-weight: lighter;
-	color: black;
-	margin: 25px auto;
-}
-
-.photos {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	width: 90%;
-	margin: 10px auto;
-	padding-bottom: 40px;
-	border-bottom: 1px solid black;
-	row-gap: 10px;
-	column-gap: 10px;
-}
-
-.photos div {
-	display: flex;
-	justify-content: right;
-	background-repeat: no-repeat;
-	background-size: 100%;
-	width: 15%;
-	height: 150px;
-}
-
-.fa-trash-can {
-	height: 15px;
-	padding: 5px;
-	background-color: black;
-	color: white;
-	border-radius: 3px;
-	z-index: 4;
-	margin-top: 5px;
-	margin-right: 5px;
-	transition: 300ms;
-}
-
-.fa-trash-can:hover {
-	background-color: red;
-}
-
-.PopUpGallery button {
-	font-family: 'Syne';
-	font-size: 15px;
-	font-weight: lighter;
-	color: white;
-	background-color: #1D6154;
-	margin: 10px auto;
-	width: 220px;
+	font-family: 'Work Sans', system-ui, -apple-system, sans-serif;
+	font-weight: 600;
+	font-size: 22px;
+	line-height: 1.2;
+	color: #000;
 	text-align: center;
-	border-radius: 60px;
-	border: none;
-	padding: 7px 22px;
+	margin: 6px 0 22px;
 }
+
+/* Croix et flèches */
+#close1,
+#close2,
+.fa-arrow-left {
+	position: absolute;
+	top: 18px;
+	font-size: 20px;
+	color: #2d2d2d;
+	cursor: pointer;
+}
+
+#close1 {
+	right: 18px;
+}
+
+#close2 {
+	right: 18px;
+}
+
+.fa-arrow-left {
+	left: 18px;
+}
+
+/* ===== Grille de miniatures ===== */
+.photos {
+	display: grid;
+	grid-template-columns: repeat(5, 78px);
+	gap: 12px 14px;
+	justify-content: center;
+	margin: 10px auto 28px;
+	width: 100%;
+}
+
+/* Une vignette (tu injectes des <div> avec background-image en JS) */
+.photos div {
+	position: relative;
+	width: 78px;
+	height: 104px;
+	/* proche des maquettes */
+	background-size: cover;
+	background-position: center;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+/* Poubelle en haut à droite */
+.photos .fa-trash-can {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	display: grid;
+	place-items: center;
+	width: 20px;
+	height: 20px;
+	font-size: 12px;
+	color: #fff;
+	background: #000;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: background .2s ease;
+}
+
+.photos .fa-trash-can:hover {
+	background: #e60000;
+}
+
+/* ===== Séparateur + bouton “Ajouter une photo” ===== */
+.addPhoto {
+	display: block;
+	margin: 0 auto;
+	/* centre le bouton */
+	padding: 10px 28px;
+	border: none;
+	border-radius: 30px;
+	background: #1D6154;
+	color: #fff;
+	font-family: 'Syne', system-ui, -apple-system, sans-serif;
+	font-weight: 700;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+/* Ligne fine au-dessus du bouton (comme sur la maquette) */
+.addPhoto::before {
+	content: "";
+	display: block;
+	width: 75%;	
+	height: 1px;
+	background: #e6e6e6;
+	margin: 22px auto 18px;
+}
+
+/* ===== Vue “Ajout photo” ===== */
+#photoAdd {
+	display: none;
+}
+
+/* affichée en JS quand on clique sur “Ajouter …” */
 
 .topDiv {
-	display: flex;
-	justify-content: space-between;
+	/* conteneur pour flèche + croix */
+	position: sticky;
+	top: 0;
+	height: 0;
+	/* les icônes sont positionnées en absolu */
 }
 
-.fa-arrow-left,
-.fa-xmark {
-	font-size: 20px;
-}
-
+/* Zone drag/drop */
 .addPicture {
-	width: 65%;
+	background: #e8f1f6;
+	border-radius: 6px;
+	padding: 18px;
+	width: min(420px, 88%);
+	margin: 12px auto 18px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	margin: 15px auto;
-	background-color: rgba(95, 158, 160, 0.2);
-	border-radius: 5px;
 }
 
 .previewImage {
 	display: none;
-	width: 30%;
+	/* passe à flex en JS quand il y a une image */
+	width: 100%;
+	aspect-ratio: 4/3;
+}
+
+.previewImage img {
+	width: 100%;
 	height: 100%;
+	object-fit: contain;
 }
 
 .fileImage {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	text-align: center;
-	margin: 15px auto;
 }
 
-.fa-image {
-	display: flex;
-	font-size: 65px;
-	color: rgba(180, 180, 180, 0.5);
+.fileImage .fa-image {
+	font-size: 60px;
+	color: #bfcad3;
 }
 
 input[type="file"] {
-	display: flex;
-	height: 0;
-	width: 0;
-	overflow: hidden;
-
+	display: none;
 }
 
-input[type="file"]+.labelFile {
-	display: flex;
-	justify-content: center;
-	padding: 10px 15px;
-	border-radius: 30px;
-	border: none;
+.labelFile {
+	margin: 10px 0 6px;
+	padding: 10px 16px;
+	border-radius: 24px;
+	background: #cbd6dc;
+	color: #306685;
+	font-weight: 700;
 	font-size: 12px;
-	color: #1D6154;
-	background-color: rgba(180, 180, 180, 0.5);
-	margin-top: 15px;
-	margin-bottom: 15px;
+	cursor: pointer;
 }
 
 .fileImage p {
-	display: flex;
 	font-size: 12px;
-	color: black;
+	color: #666;
 }
 
+/* Formulaire titre + catégorie */
 .divInfo {
-	width: 65%;
-	display: flex;
-	flex-direction: column;
-	padding-bottom: 45px;
-	border-bottom: 1px solid black;
-	margin: 5px auto;
+	width: min(420px, 88%);
+	margin: 0 auto 6px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #e6e6e6;
+	display: grid;
+	grid-template-columns: 1fr;
+	row-gap: 8px;
 }
 
 .divInfo label {
-	font-size: 15px;
-	font-weight: bold;
-	margin-bottom: 15px;
-	margin-top: 15px;
+	margin-top: 18px;
+	font-size: 14px;
+	font-weight: 700;
+	color: #2d2d2d;
 }
 
 .divInfo input,
 .divInfo select {
-	height: 50px;
-	font-size: 1.2em;
-	border-radius: 2px;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	height: 48px;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 0 12px;
+	font-size: 15px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
 }
 
-
+/* Bouton Valider (désactivé par défaut côté JS si besoin) */
 #btnValidate {
-	font-family: 'Syne';
-	color: white;
-	background-color: rgba(128, 128, 128, 0.5);
-	margin: 2em auto;
-	width: 210px;
-	text-align: center;
-	border-radius: 60px;
-	padding: 10px;
+	display: block;
+	width: 230px;
+	margin: 22px auto 0;
+	padding: 10px 0;
 	border: none;
+	border-radius: 30px;
+	background: #a7a7a7;
+	color: #fff;
+	font-family: 'Syne', system-ui, -apple-system, sans-serif;
+	font-weight: 700;
+	cursor: not-allowed;
 }
+
+#btnValidate.enabled {
+	/* ajoute cette classe en JS quand le form est valide */
+	background: #1D6154;
+	cursor: pointer;
+}
+
+/* ===== Confort d’usage ===== */
+body.modal-open {
+	overflow: hidden;
+}
+
+/* empêche le scroll du body quand la modale est ouverte */

@@ -90,39 +90,41 @@
 		</footer>
 	</div>
 	<div class="backgroundPopUp">
-		<div class="PopUpGallery" id="galleryPhoto">
-			<i class="fa-solid fa-xmark" id="close1"></i>
-			<h2>Galerie Photo</h2>
-			<div class="photos"></div>
-			<button type="button" class="addPhoto">Ajouter une photo</button>
-		</div>
-		<div class="PopUpGallery" id="photoAdd">
-			<div class="topDiv">
-				<i class="fa-solid fa-arrow-left"></i>
-				<i class="fa-solid fa-xmark" id="close2"></i>
+		<div class="contentModal">
+			<div class="PopUpGallery" id="galleryPhoto">
+				<i class="fa-solid fa-xmark" id="close1"></i>
+				<h2>Galerie Photo</h2>
+				<div class="photos"></div>
+				<button type="button" class="addPhoto">Ajouter une photo</button>
 			</div>
-			<h2>Ajout Photo</h2>
-			<div class="addPicture">
-				<div class="previewImage"></div>
-				<div class="fileImage">
-					<i class="fa-regular fa-image"></i>
-					<input type="file" id="file" accept="image/*">
-					<label for="file" class="labelFile">+ Ajouter photo</label>
-					<p>jpg, png : 4mo max</p>
+			<div class="PopUpGallery" id="photoAdd">
+				<div class="topDiv">
+					<i class="fa-solid fa-arrow-left"></i>
+					<i class="fa-solid fa-xmark" id="close2"></i>
 				</div>
+				<h2>Ajout Photo</h2>
+				<div class="addPicture">
+					<div class="previewImage"></div>
+					<div class="fileImage">
+						<i class="fa-regular fa-image"></i>
+						<input type="file" id="file" accept="image/*">
+						<label for="file" class="labelFile">+ Ajouter photo</label>
+						<p>jpg, png : 4mo max</p>
+					</div>
+				</div>
+				<div class="divInfo">
+					<label for="tilte">Titre</label>
+					<input type="text" id="tilteProject">
+					<label for="Categorie">Categorie</label>
+					<select name="categorySelect" id="categorySelect">
+						<option value=""></option>
+						<option value="1" id="1">Objet</option>
+						<option value="2" id="2">Appartements</option>
+						<option value="3" id="3">Hotels & restaurants</option>
+					</select>
+				</div>
+				<button type="button" id="btnValidate">Valider</button>
 			</div>
-			<div class="divInfo">
-				<label for="tilte">Titre</label>
-				<input type="text" id="tilteProject">
-				<label for="Categorie">Categorie</label>
-				<select name="categorySelect" id="categorySelect">
-					<option value=""></option>
-					<option value="1" id="1">Objet</option>
-					<option value="2" id="2">Appartements</option>
-					<option value="3" id="3">Hotels & restaurants</option>
-				</select>
-			</div>
-			<button type="button" id="btnValidate">Valider</button>
 		</div>
 	</div>
 </body>
