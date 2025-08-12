@@ -1,62 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
-    rel="stylesheet">
-  <meta name="description" content="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<meta name="description" content="">
 
-  <link rel="stylesheet" href="./assets/style.css">
-  <link rel="stylesheet" href="./assets/style_login.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/style_login.css">
 
+    <script src="./api/login.js" defer></script>
 
-  <title>Sophie Bluel - Architecte d'intérieur - Login</title>
+    <title>Sophie Bluel - Architecte d'intérieur - Login</title>
 </head>
-
 <body>
-  <header>
-    <h1>
-      <a href="index.html" class="home-link">
-        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-      </a>
-    </h1>
-    <nav>
-      <ul>
-        <li>projets</li>
-        <li>contact</li>
-        <li><a href="login.html">Login</a></li>
-        <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <div class="contentLogin">
-      <h1>Log in</h1>
-      <form id="loginForm">
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="emailLogin" value="sophie.bluel@test.tld">
-        <label for="password">Mot de passe</label>
-        <input type="text" name="password" id="password" value='S0phie'>
-        <input type="submit" value="Se connecter" id="connection">
-        <a href="#">Mot de passe oublié</a>
-        <p id="errorMessage" class="error-message"></p>
-      </form>
+    <div class="divBody">
+        <header>
+            <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+            <nav>
+                <ul>
+                    <li>projets</li>
+                    <li>contact</li>
+                    <li class="log">login</li>
+                    <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="contentLogin">
+                <h1>Log in</h1>
+                <form action="#" method="get" class="formLogin">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="emailLogin" value="sophie.bluel@test.tld">
+                    <label for="passWord">Mot de passe</label>
+                    <input type="text" name="passWord" id="passWord" value="S0phie">
+                    <input type="submit" value="Se connecter" id="connection">
+                    <a href="#">Mot de passe oublié</a>
+                </form>
+                <div class="message"></div>
+            </div>
+        </main>
+        
+        <footer>
+            <nav>
+                <ul>
+                    <li>Mentions Légales</li>
+                </ul>
+            </nav>
+        </footer>
     </div>
-  </main>
-
-  <footer>
-    <nav>
-      <ul>
-        <li>Mentions Légales</li>
-      </ul>
-    </nav>
-  </footer>
-  <script src="api/login.js" defer></script>
 </body>
-
 </html>
