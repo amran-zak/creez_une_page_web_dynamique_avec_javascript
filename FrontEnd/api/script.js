@@ -37,6 +37,10 @@ function renderFilters(categories) {
   });
 
   addFilterListeners();
+
+  const defaultFilter = divContent.querySelector('.filtres[data-category-id=""]');
+  setActiveFilter(defaultFilter);   // style actif
+  fetchWorks();                     // affiche tous les travaux
 }
 
 function createFilter(id, label) {
@@ -54,6 +58,7 @@ function addFilterListeners() {
   document.querySelectorAll(".filtres").forEach(filter => {
     filter.addEventListener("click", () => {
       const id = filter.dataset.categoryId;
+      setActiveFilter(filter);
       id ? fetchFilteredWorks(id) : fetchWorks();
     });
   });
@@ -73,6 +78,13 @@ function fetchFilteredWorks(categoryId) {
 function fetchCategories() {
   fetchData("categories").then(renderFilters);
 }
+
+// active visuellement un filtre
+function setActiveFilter(el) {
+  document.querySelectorAll(".filtres").forEach(f => f.classList.remove("active"));
+  if (el) el.classList.add("active");
+}
+
 
 // === MODALE ADMIN === //
 function renderModalPhotos(works) {
@@ -169,6 +181,7 @@ function setupAdminUI() {
     setDisplay(photoAdd, "flex");
     resetForm();
     setupPreviewImage();
+    setupFormValidation();
   });
 
   document.getElementById("btnValidate").addEventListener("click", submitNewProject);
@@ -195,6 +208,36 @@ function closeModal() {
   setDisplay(document.getElementById("photoAdd"), "none");
   fetchWorks();
 }
+
+// === VALIDATION FORMULAIRE AJOUT PHOTO === //
+function setupFormValidation() {
+  const titleInput = document.getElementById("tilteProject");
+  const categorySelect = document.getElementById("categorySelect");
+  const btnValidate = document.getElementById("btnValidate");
+
+  function checkFormValidity() {
+    const fileOk = btnAddPhoto.files.length > 0;
+    const titleOk = titleInput.value.trim() !== "";
+    const categoryOk = categorySelect.value !== "";
+
+    if (fileOk && titleOk && categoryOk) {
+      btnValidate.classList.add("enabled");
+      btnValidate.disabled = false;
+    } else {
+      btnValidate.classList.remove("enabled");
+      btnValidate.disabled = true;
+    }
+  }
+
+  // écoute des changements
+  btnAddPhoto.addEventListener("change", checkFormValidity);
+  titleInput.addEventListener("input", checkFormValidity);
+  categorySelect.addEventListener("change", checkFormValidity);
+
+  // init à l’ouverture
+  checkFormValidity();
+}
+
 
 // === INIT === //
 if (!token) {

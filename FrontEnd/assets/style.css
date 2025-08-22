@@ -283,6 +283,12 @@ nav a:hover {
 	font-weight: normal;
 }
 
+.filtres.active {
+  background-color: #1D6154;
+  color: #fff;
+  font-weight: normal;
+}
+
 
 .gallery {
 	width: 100%;
